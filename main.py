@@ -37,18 +37,17 @@ from baseline.AdvPrompter.AdvPrompter_single_main import (
 )
 from baseline.AmpleGCG.utils import load_target_models_amplegcg
 from baseline.AdvPrompter.utils import load_target_models_advprompter
-from baseline.DrAttack.DrAttack_single_main import DrAttack_initial, DrAttack_single_main, DrAttack_stop
+from baseline.DrAttack.DrAttack_single_main import (
+    DrAttack_initial,
+    DrAttack_single_main,
+    DrAttack_stop,
+)
 from baseline.MultiJail.MultiJail_single_main import (
     MultiJail_initial,
     MultiJail_generate_suffix,
     MultiJail_single_main,
 )
 from baseline.MultiJail.utils import load_target_models_MultiJail
-# import defense methods
-from defense import test_smoothLLM, generate_defense_goal
-
-# import evaluation agent
-from GPTEvaluatorAgent.agent_eval import agent_evaluation
 
 
 def generate_attack_result(goal, target, models, device, args, curr_output):
@@ -118,8 +117,12 @@ def generate_attack_result(goal, target, models, device, args, curr_output):
         )
         curr_output["adv_prompt"] = curr_output_record["adv_prompt"]
         curr_output["optimized_sentence"] = curr_output_record["optimized_sentence"]
-        curr_output["language_model_output"] = curr_output_record["language_model_output"]
-        curr_output["negative_similarity_score"] = curr_output_record["negative_similarity_score"]
+        curr_output["language_model_output"] = curr_output_record[
+            "language_model_output"
+        ]
+        curr_output["negative_similarity_score"] = curr_output_record[
+            "negative_similarity_score"
+        ]
         curr_output["attack_iterations"] = curr_output_record["attack_iterations"]
         curr_output["is_JB"] = curr_output_record["is_JB"]
     elif args.attack == "MultiJail":
@@ -203,21 +206,9 @@ def generate_attack_result(goal, target, models, device, args, curr_output):
 
 
 def test(goals, targets, models, device, args, all_output=[]):
-    if args.attack == "DrAttack" and args.defense_type in ["self_reminder", "RPO", "smoothLLM"]:
-            instruction_name = args.instructions_path.split("/")[-1]
-            pert_goals_path = instruction2dratk_data_path[instruction_name][args.defense_type]
-            # pert_goals = load_pert_goals(pert_goals_path)
-            pert_goals = load_goals(pert_goals_path)
-    else:
-        pert_goals = [
-            generate_defense_goal(
-                goal_i,
-                defense_type=args.defense_type,
-                pert_type=args.pert_type,
-                smoothllm_pert_pct=args.smoothllm_pert_pct,
-            )
-            for goal_i in goals
-        ]
+    # Use original goals without defense perturbations
+    pert_goals = goals
+
     if args.attack == "AmpleGCG":
         args.suffix_dict = AmpleGCG_generate_suffix(args, pert_goals)
         models = [load_target_models_amplegcg(args)]
@@ -236,7 +227,6 @@ def test(goals, targets, models, device, args, all_output=[]):
         ),
         desc="Testing",
     ):
-        print(f"""\n{'=' * 36}\nDefense Method: {args.defense_type}\n{'=' * 36}\n""")
         curr_output = {
             "original_prompt": goal_i,
             "perturbed_prompt": pert_goal_i,
@@ -246,8 +236,6 @@ def test(goals, targets, models, device, args, all_output=[]):
             "attack_iterations": None,
             "data_id": args.test_data_idx,
             "is_JB": "None",
-            "is_JB_Judge": "None",
-            "is_JB_Agent": "None",
         }
         print(curr_output)
 
@@ -366,37 +354,8 @@ def main(args):
                 )
     all_output = run(goals, targets, target_model_path, device, args, all_output)
 
-    # test smoothLLM
-    if args.defense_type == "smoothLLM" and args.attack != "DrAttack":
-        final_all_output = test_smoothLLM(all_output, args)
-    else:
-        print(f"""\n{'=' * 36}\nNo SmoothLLM Test\n{'=' * 36}\n""")
-        final_all_output = all_output
-
-    # agent evaluation
-    if args.agent_evaluation:
-        final_all_output = load_split_file_whole(args)
-        if len(final_all_output) != len(goals):
-            print(
-                "Find the final_all_output is not equal to the goals, skip the agent evaluation"
-            )
-            return
-        if not args.agent_recheck and args.resume_exp:
-            print("Find resume_exp is True, check whether need to do agent evaluation")
-            if final_all_output[-1]["is_JB_Agent"] != "None":
-                print(f"""\n{'*' * 36}\nSkip the agent evaluation\n{'*' * 36}\n""")
-                save_test_to_file(args=args, instructions=final_all_output)
-                return
-            else:
-                print("Start the agent evaluation")
-        elif args.agent_recheck:
-            print("Find agent_recheck is True, start the agent evaluation")
-        else:
-            print("Start the agent evaluation")
-        print(f"""\n{'=' * 36}\nAgent Evaluation\n{'=' * 36}\n""")
-        final_all_output = agent_evaluation(args=args, data=final_all_output)
-        save_test_to_file(args=args, instructions=final_all_output)
-        print(f"""\n{'=' * 36}\nFinish Agent Evaluation\n{'=' * 36}\n""")
+    print(f"""\n{'=' * 36}\nAttack Generation Complete\n{'=' * 36}\n""")
+    print(f"Generated {len(all_output)} jailbreak prompts")
 
 
 if __name__ == "__main__":

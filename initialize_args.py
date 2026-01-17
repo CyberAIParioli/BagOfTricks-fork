@@ -8,41 +8,6 @@ def initialize_args():
     """
     parser = argparse.ArgumentParser(description="Process some integers.")
     ##################################################
-    ########### Agent Evaluation parameters ##########
-    parser.add_argument(
-        "--agent_evaluation", action="store_true", help="use agent to evaluate"
-    )
-    parser.add_argument(
-        "--judge_only_true",
-        action="store_true",
-        help="only use agent to evaluate the jb results",
-    )
-    parser.add_argument(
-        "--agent_recheck",
-        action="store_true",
-        help="set true if need to recheck each data point",
-    )
-    ############ Judge agent model parameters ##########
-    parser.add_argument(
-        "--judge_model",
-        default="gpt-4",
-        help="Name of judge model.",
-        choices=["gpt-3.5-turbo", "gpt-4", "no-judge"],
-    )
-    parser.add_argument(
-        "--judge_max_n_tokens",
-        type=int,
-        default=500,
-        help="Maximum number of tokens for the judge.",
-    )
-    parser.add_argument(
-        "--judge_temperature",
-        type=float,
-        default=0,
-        help="Temperature to use for judge.",
-    )
-    ##################################################
-
     ########### Debug parameters ##########
     parser.add_argument("--start_index", type=int, default=0, help="Start index")
     parser.add_argument("--end_index", type=int, default=0, help="End index")
@@ -134,46 +99,6 @@ def initialize_args():
     )
     parser.add_argument("--device_id", type=int, default="0", help="device id")
     ##################################################
-    ################### Defense Methods###############################
-    parser.add_argument(
-        "--defense_type",
-        type=str,
-        default="smoothLLM",
-        choices=[
-            "None_defense",
-            "self_reminder",
-            "RPO",
-            "unlearn",
-            "smoothLLM",
-            "safety_tuning",
-            "adv_training_noaug",
-        ],
-        help="The defense methods ofr LLM",
-    )
-    parser.add_argument(
-        "--pert_type",
-        type=str,
-        default="RandomSwapPerturbation",
-        choices=[
-            "RandomSwapPerturbation",
-            "RandomPatchPerturbation",
-            "RandomInsertPerturbation",
-        ],
-        help="The perturb type in smoothLLM",
-    )
-    parser.add_argument(
-        "--smoothllm_pert_pct",
-        type=float,
-        default=0.1,
-        help="The ratio of perturbations.",
-    )
-    parser.add_argument(
-        "--smoothllm_num_copies",
-        type=int,
-        default=10,
-        help="The number of copis for prompts.",
-    )
-    ##############################
     ################## Attack Methods################################
     parser.add_argument(
         "--attack",
