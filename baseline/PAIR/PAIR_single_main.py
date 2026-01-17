@@ -1,4 +1,3 @@
-import argparse
 from baseline.PAIR.system_prompts import get_attacker_system_prompt
 from baseline.PAIR.judges_pair import load_judge
 from baseline.PAIR.conversers_pair import load_attack_and_target_models_pair
@@ -7,11 +6,8 @@ from baseline.PAIR.common import (
     get_init_msg,
     conv_template,
 )
-import csv
-from tqdm import tqdm
 from utils.test_utils import test_prefixes
 from baseline.PAIR.system_prompts import get_judge_system_prompt
-import time
 
 
 def main(args, goal, target, attackLM, targetLM, judgeLM, i):

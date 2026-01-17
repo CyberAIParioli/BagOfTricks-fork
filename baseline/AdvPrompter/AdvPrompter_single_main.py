@@ -1,16 +1,5 @@
-import gc
-import os
-import numpy as np
-import torch.nn as nn
-import time
-import argparse
-import pandas as pd
-import json
-from tqdm import tqdm
-import random
 from utils.test_utils import test_prefixes
 from baseline.AdvPrompter.llm import AdvPrompter
-import torch
 
 
 class Args:

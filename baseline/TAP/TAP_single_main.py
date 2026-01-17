@@ -1,6 +1,6 @@
 import copy
-import argparse
 import numpy as np
+import time
 from baseline.TAP.system_prompts import get_attacker_system_prompt
 from baseline.TAP.evaluators import load_evaluator
 from baseline.TAP.conversers_tap import load_attack_and_target_models_tap
@@ -10,17 +10,16 @@ from baseline.TAP.common_tap import (
     conv_template,
     random_string,
 )
-from tqdm import tqdm
-import csv
 from baseline.TAP.system_prompts import (
     get_evaluator_system_prompt_for_judge,
     get_evaluator_system_prompt_for_on_topic,
 )
 from utils.test_utils import test_prefixes
-import time
 
 
 def load_prompts(instructions_path):
+    import csv
+
     with open(instructions_path, "r", newline="", encoding="utf-8") as f:
         reader = csv.DictReader(f)
         goals = []

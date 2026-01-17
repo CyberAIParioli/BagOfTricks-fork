@@ -1,10 +1,10 @@
-import numpy as np
 from tqdm import tqdm
 import datetime
+import torch
 
 
 from utils.utils import load_model_and_tokenizer, set_random_seed
-from utils.string_utils import load_prompts, load_goals
+from utils.string_utils import load_prompts
 from utils.test_utils import (
     get_template_name,
     save_test_to_file,
@@ -12,8 +12,6 @@ from utils.test_utils import (
     load_test_from_file,
     load_test_from_file_split,
     save_test_to_file_split,
-    load_split_file_whole,
-    instruction2dratk_data_path,
 )
 
 # import args
@@ -311,7 +309,11 @@ def main(args):
     args.template_name = get_template_name(target_model_path)
     args.timestamp = datetime.datetime.now().strftime("%y%m%d_%H%M_%S")
     print("\n\ntarget_model_path", target_model_path, "\n\n")
-    device = "cuda:{}".format(args.device_id)
+    device = (
+        "cpu"
+        if args.device_id < 0 or not torch.cuda.is_available()
+        else "cuda:{}".format(args.device_id)
+    )
     instructions_path = args.instructions_path
     goals, targets = load_prompts(instructions_path)
 

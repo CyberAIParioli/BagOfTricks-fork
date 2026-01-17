@@ -97,6 +97,16 @@ attack_rename = {
     "DrAttack": "8DrAttack",
     "MultiJail": "9MultiJail",
 }
+defense_rename = {
+    "None_defense": "1None_defense",
+    "self_reminder": "2self_reminder",
+    "RPO": "3RPO",
+    "unlearn": "4unlearn",
+    "smoothLLM": "5smoothLLM",
+    "safety_tuning": "6safety_tuning",
+    "adv_training_noaug": "7adv_training_noaug",
+}
+
 rename_attack = {
     "1AutoDAN": "AutoDAN",
     "2PAIR": "PAIR",
@@ -107,6 +117,44 @@ rename_attack = {
     "7AmpleGCG": "AmpleGCG",
     "8DrAttack": "DrAttack",
     "9MultiJail": "MultiJail",
+}
+rename_defense = {
+    "1None_defense": "None_defense",
+    "2self_reminder": "self_reminder",
+    "3RPO": "RPO",
+    "4unlearn": "unlearn",
+    "5smoothLLM": "smoothLLM",
+    "6safety_tuning": "safety_tuning",
+    "7adv_training_noaug": "adv_training_noaug",
+}
+
+instruction2dratk_data_path = {
+    "harmful_bench_52.csv": {
+        "self_reminder": "./baseline/DrAttack/dratk_data/harmful_bench_52_self_reminder.csv",
+        "RPO": "./baseline/DrAttack/dratk_data/harmful_bench_52_RPO.csv",
+        "smoothLLM": "./baseline/DrAttack/dratk_data/harmful_bench_52_smoothLLM.csv",
+    },
+    "MaliciousInstruct_100.csv": {
+        "self_reminder": "./baseline/DrAttack/dratk_data/MaliciousInstruct_100_self_reminder.csv",
+        "RPO": "./baseline/DrAttack/dratk_data/MaliciousInstruct_100_RPO.csv",
+        "smoothLLM": "./baseline/DrAttack/dratk_data/MaliciousInstruct_100_smoothLLM.csv",
+    },
+}
+
+
+instruction2dratk_info_path = {
+    "harmful_bench_52.csv": {
+        "None_defense": "./dratk_data/attack_prompt_data/harmful_bench_test_info.json",
+        "self_reminder": "./baseline/DrAttack/dratk_data/attack_prompt_data/harmful_bench_52_self_reminder_info.json",
+        "RPO": "./baseline/DrAttack/dratk_data/attack_prompt_data/harmful_bench_52_RPO_info.json",
+        "smoothLLM": "./baseline/DrAttack/dratk_data/attack_prompt_data/harmful_bench_52_smoothLLM_info.json",
+    },
+    "MaliciousInstruct_100.csv": {
+        "None_defense": "./baseline/DrAttack/dratk_data/attack_prompt_data/MaliciousInstruct_info.json",
+        "self_reminder": "./baseline/DrAttack/dratk_data/attack_prompt_data/MaliciousInstruct_100_self_reminder_info.json",
+        "RPO": "./baseline/DrAttack/dratk_data/attack_prompt_data/MaliciousInstruct_100_RPO_info.json",
+        "smoothLLM": "./baseline/DrAttack/dratk_data/attack_prompt_data/MaliciousInstruct_100_smoothLLM_info.json",
+    },
 }
 
 
@@ -142,7 +190,7 @@ def load_test_from_file_split(args):
     dataset_name = instructions_path.split("/")[-1].split(".")[0]
     model_name = args.target_model_path.split("/")[-1]
     attack_type = attack_rename[args.attack]
-    defense_type = args.defense_type
+    defense_type = defense_rename[args.defense_type]
     exp_name = args.exp_name
     path_name = (
         os.path.join(
@@ -195,7 +243,7 @@ def load_test_from_file(args):
     dataset_name = instructions_path.split("/")[-1].split(".")[0]
     model_name = args.target_model_path.split("/")[-1]
     attack_type = attack_rename[args.attack]
-    defense_type = args.defense_type
+    defense_type = defense_rename[args.defense_type]
     exp_name = args.exp_name
     path_name = (
         os.path.join(
@@ -235,7 +283,7 @@ def save_test_to_file(args, instructions):
     dataset_name = instructions_path.split("/")[-1].split(".")[0]
     model_name = args.target_model_path.split("/")[-1]
     attack_type = attack_rename[args.attack]
-    defense_type = args.defense_type
+    defense_type = defense_rename[args.defense_type]
     exp_name = args.exp_name
     file_name_adv_prompt = (
         f"defense_{args.defense_type}__{model_name}__attack_{args.attack}__{timestamp}"
@@ -260,7 +308,7 @@ def save_test_to_file_split(args, instruction):
     dataset_name = instructions_path.split("/")[-1].split(".")[0]
     model_name = args.target_model_path.split("/")[-1]
     attack_type = attack_rename[args.attack]
-    defense_type = args.defense_type
+    defense_type = defense_rename[args.defense_type]
     idx = instruction["data_id"]
     file_name_adv_prompt = f"{idx}_defense_{args.defense_type}__{model_name}__attack_{args.attack}__{timestamp}"
     exp_name = args.exp_name
@@ -290,7 +338,7 @@ def load_split_file_single(args, idx):
     dataset_name = instructions_path.split("/")[-1].split(".")[0]
     model_name = args.target_model_path.split("/")[-1]
     attack_type = attack_rename[args.attack]
-    defense_type = args.defense_type
+    defense_type = defense_rename[args.defense_type]
     exp_name = args.exp_name
     path_name = (
         os.path.join(
@@ -336,7 +384,7 @@ def load_split_file_whole(args):
     dataset_name = instructions_path.split("/")[-1].split(".")[0]
     model_name = args.target_model_path.split("/")[-1]
     attack_type = attack_rename[args.attack]
-    defense_type = args.defense_type
+    defense_type = defense_rename[args.defense_type]
     exp_name = args.exp_name
     path_name = (
         os.path.join(

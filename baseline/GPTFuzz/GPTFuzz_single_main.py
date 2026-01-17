@@ -1,8 +1,3 @@
-import os
-
-from fastchat.model import add_model_args
-import argparse
-import pandas as pd
 from baseline.GPTFuzz.gptfuzzer.fuzzer.selection import MCTSExploreSelectPolicy
 from baseline.GPTFuzz.gptfuzzer.fuzzer.mutator import (
     MutateRandomSinglePolicy,
@@ -22,16 +17,9 @@ from baseline.GPTFuzz.gptfuzzer.llm import (
 )
 from baseline.GPTFuzz.gptfuzzer.utils.predict import RoBERTaPredictor
 import random
+import pandas as pd
 
 random.seed(100)
-import logging
-
-httpx_logger: logging.Logger = logging.getLogger("httpx")
-# disable httpx logging
-httpx_logger.setLevel(logging.WARNING)
-from tqdm import tqdm
-import csv
-import json
 from utils.test_utils import test_prefixes
 
 

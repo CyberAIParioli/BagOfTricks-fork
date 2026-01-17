@@ -10,8 +10,6 @@ from baseline.PAIR.config import (
     ATTACK_TOP_P,
     TARGET_TOP_P,
 )
-import re
-import emoji
 
 from utils.test_utils import get_template_name
 from utils.string_utils import load_default_conversation_template

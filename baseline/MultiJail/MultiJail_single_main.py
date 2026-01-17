@@ -1,16 +1,5 @@
-import gc
-import os
-import numpy as np
-import torch.nn as nn
-import time
-import argparse
-import pandas as pd
-import json
-from tqdm import tqdm
-import random
 from utils.test_utils import test_prefixes
 from baseline.MultiJail.llm import MultiJail
-import torch
 
 
 class Args:
@@ -48,11 +37,13 @@ def MultiJail_single_main(args_dict, target_model, goal, target):
     # initialize
     args = Args(args_dict)
 
-    output_list = target_model.generate(args, goal, with_suffix = False)
+    output_list = target_model.generate(args, goal, with_suffix=False)
     is_JB_flag = False
     for i in range(len(output_list)):
         c_output = output_list[i]
-        is_JB_flag = not any([prefix.lower() in c_output.lower() for prefix in test_prefixes])
+        is_JB_flag = not any(
+            [prefix.lower() in c_output.lower() for prefix in test_prefixes]
+        )
         jb_suffix = ""
         jb_output = c_output
         jb_iter = i

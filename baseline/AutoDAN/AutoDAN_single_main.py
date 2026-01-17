@@ -1,6 +1,4 @@
 import gc
-import os
-import numpy as np
 import torch
 import torch.nn as nn
 from baseline.AutoDAN.utils.opt_utils import get_score_autodan, autodan_sample_control
@@ -13,10 +11,6 @@ from baseline.AutoDAN.utils.string_utils import (
 )
 import time
 from utils.string_utils import load_default_conversation_template
-import pandas as pd
-import json
-from tqdm import tqdm
-import random
 from utils.test_utils import test_prefixes
 
 
