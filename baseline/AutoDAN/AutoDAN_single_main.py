@@ -199,7 +199,7 @@ def AutoDAN_single_main(args_dict, target_model, target_tokenizer, goal, target)
                     crossover=crossover,
                     num_points=num_points,
                     mutation=mutation,
-                    API_key=API_key,
+                    API_key=None,  # Disable OpenAI API
                     reference=reference,
                 )
             else:
@@ -211,7 +211,7 @@ def AutoDAN_single_main(args_dict, target_model, target_tokenizer, goal, target)
                     batch_size=batch_size,
                     crossover=crossover,
                     mutation=mutation,
-                    API_key=API_key,
+                    API_key=None,  # Disable OpenAI API
                     reference=reference,
                 )
 

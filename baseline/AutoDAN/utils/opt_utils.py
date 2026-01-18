@@ -103,7 +103,7 @@ def autodan_sample_control(
     API_key=None,
     reference=None,
     if_softmax=True,
-    if_api=True,
+    if_api=False,
 ):
     score_list = [-x for x in score_list]
     # Step 1: Sort the score_list and get corresponding control_suffixs
@@ -162,7 +162,7 @@ def apply_crossover_and_mutation(
     mutation_rate=0.01,
     API_key=None,
     reference=None,
-    if_api=True,
+    if_api=False,
 ):
     offspring = []
 
@@ -276,7 +276,7 @@ def gpt_mutate(sentence, API_key=None):
 
 
 def apply_gpt_mutation(
-    offspring, mutation_rate=0.01, API_key=None, reference=None, if_api=True
+    offspring, mutation_rate=0.01, API_key=None, reference=None, if_api=False
 ):
     if if_api:
         for i in range(len(offspring)):
@@ -292,7 +292,7 @@ def apply_gpt_mutation(
     return offspring
 
 
-def apply_init_gpt_mutation(offspring, mutation_rate=0.01, API_key=None, if_api=True):
+def apply_init_gpt_mutation(offspring, mutation_rate=0.01, API_key=None, if_api=False):
     for i in tqdm(range(len(offspring)), desc="initializing..."):
         if if_api:
             if random.random() < mutation_rate:
@@ -349,7 +349,7 @@ def autodan_sample_control_hga(
     mutation=0.01,
     API_key=None,
     reference=None,
-    if_api=True,
+    if_api=False,
 ):
     score_list = [-x for x in score_list]
     # Step 1: Sort the score_list and get corresponding control_suffixs
