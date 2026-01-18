@@ -1,4 +1,3 @@
-
 import numpy as np
 import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig
@@ -16,59 +15,84 @@ def set_random_seed(seed):
         # torch.backends.cudnn.deterministic = True
 
 
-def load_model_and_tokenizer(model_path, tokenizer_path=None, device='cuda:0'):
-    # , bnb_4bit_compute_dtype=torch.bfloat16)
-    quantization_config = BitsAndBytesConfig(load_in_4bit=True)
-    if "70b" in model_path.lower() or "13b" in model_path.lower():
-        model = AutoModelForCausalLM.from_pretrained(
-            model_path,
-            torch_dtype=torch.bfloat16,
-            quantization_config=quantization_config,
-            trust_remote_code=True,
-            output_hidden_states=True,
-            device_map="auto",
-        ).eval()
-        print("Model loaded with 4-bit compute dtype")
+def load_model_and_tokenizer(model_path, tokenizer_path=None, device="cuda:0"):
+    # Use float32 for CPU, bfloat16 for CUDA
+    dtype = (
+        torch.float32
+        if device == "cpu" or not torch.cuda.is_available()
+        else torch.bfloat16
+    )
+
+    # Only use quantization on CUDA
+    if device != "cpu" and torch.cuda.is_available():
+        quantization_config = BitsAndBytesConfig(load_in_4bit=True)
     else:
-        model = AutoModelForCausalLM.from_pretrained(
-            model_path,
-            torch_dtype=torch.bfloat16,
-            trust_remote_code=True,
-            output_hidden_states=True,
-            device_map="auto",
-        ).to(device).eval()
+        quantization_config = None
+
+    if "70b" in model_path.lower() or "13b" in model_path.lower():
+        if quantization_config:
+            model = AutoModelForCausalLM.from_pretrained(
+                model_path,
+                torch_dtype=dtype,
+                quantization_config=quantization_config,
+                trust_remote_code=True,
+                output_hidden_states=True,
+                device_map="auto",
+            ).eval()
+            print("Model loaded with 4-bit compute dtype")
+        else:
+            model = (
+                AutoModelForCausalLM.from_pretrained(
+                    model_path,
+                    torch_dtype=dtype,
+                    trust_remote_code=True,
+                    output_hidden_states=True,
+                )
+                .to(device)
+                .eval()
+            )
+            print("Model loaded on CPU with float32")
+    else:
+        model = (
+            AutoModelForCausalLM.from_pretrained(
+                model_path,
+                torch_dtype=dtype,
+                trust_remote_code=True,
+                output_hidden_states=True,
+                device_map="auto" if device != "cpu" else None,
+            )
+            .to(device)
+            .eval()
+        )
 
     tokenizer_path = model_path if tokenizer_path is None else tokenizer_path
 
     tokenizer = AutoTokenizer.from_pretrained(
-        tokenizer_path,
-        trust_remote_code=True,
-        use_fast=False
+        tokenizer_path, trust_remote_code=True, use_fast=False
     )
 
-    if 'oasst-sft-6-llama-30b' in tokenizer_path:
+    if "oasst-sft-6-llama-30b" in tokenizer_path:
         tokenizer.bos_token_id = 1
         tokenizer.unk_token_id = 0
-    if 'guanaco' in tokenizer_path:
+    if "guanaco" in tokenizer_path:
         tokenizer.eos_token_id = 2
         tokenizer.unk_token_id = 0
-    if 'LlamaGuard' in tokenizer_path:
+    if "LlamaGuard" in tokenizer_path:
         tokenizer.pad_token = tokenizer.unk_token
-        tokenizer.padding_side = 'left'
-    if 'llama-2' in tokenizer_path:
+        tokenizer.padding_side = "left"
+    if "llama-2" in tokenizer_path:
         tokenizer.pad_token = tokenizer.unk_token
-        tokenizer.padding_side = 'left'
-    if 'falcon' in tokenizer_path:
-        tokenizer.padding_side = 'left'
+        tokenizer.padding_side = "left"
+    if "falcon" in tokenizer_path:
+        tokenizer.padding_side = "left"
     if not tokenizer.pad_token:
         tokenizer.pad_token = tokenizer.eos_token
 
     return model, tokenizer
 
 
-
 def remove_last_character_if_bracket(file_path):
-    with open(file_path, 'rb+') as file:
+    with open(file_path, "rb+") as file:
         file.seek(-1, os.SEEK_END)
         if file.read(1) == b"]":
             file.seek(-1, os.SEEK_END)
@@ -76,7 +100,7 @@ def remove_last_character_if_bracket(file_path):
 
 
 def append_to_json_list(data_record, file_path):
-    with open(file_path, 'a') as file:
+    with open(file_path, "a") as file:
         # Check if the file already contains data and hence, requires a comma
         file.seek(0, os.SEEK_END)  # Move the cursor to the end of the file
         position = file.tell()  # Get the current position
@@ -86,7 +110,7 @@ def append_to_json_list(data_record, file_path):
 
 
 def finalize_json_list(file_path):
-    with open(file_path, 'a') as file:
+    with open(file_path, "a") as file:
         file.write("]")
 
 
@@ -102,7 +126,7 @@ def save_to_file(args: dict, data_record: list):
     # If the file doesn't exist, create it and write an opening bracket.
     # If it exists, remove the last character if it's a closing bracket.
     if not os.path.exists(file_path):
-        with open(file_path, 'w') as file:
+        with open(file_path, "w") as file:
             file.write("[")
     else:
         remove_last_character_if_bracket(file_path)

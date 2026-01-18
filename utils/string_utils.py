@@ -1,6 +1,6 @@
 import csv
-from FastChat.fastchat import model as fsmodel
-from FastChat.fastchat.model.model_adapter import get_model_adapter
+from fastchat import model as fsmodel
+from fastchat.model.model_adapter import get_model_adapter
 
 
 def load_prompts(instructions_path):

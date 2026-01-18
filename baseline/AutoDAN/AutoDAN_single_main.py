@@ -100,7 +100,11 @@ class Args:
 def AutoDAN_single_main(args_dict, target_model, target_tokenizer, goal, target):
     # initialize
     args = Args(args_dict)
-    device = f"cuda:{args.device}"
+    device = (
+        "cpu"
+        if args.device_id < 0 or not torch.cuda.is_available()
+        else f"cuda:{args.device}"
+    )
     model_path = args.target_model_path
     template_name = args.template_name
 
