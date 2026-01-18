@@ -168,7 +168,7 @@ python main.py -h
 - [AutoDAN][R-AutoDAN]
   ```bash
   python -u main.py \
-    --target_model_path lmsys/vicuna-13b-v1.5 \
+    --target_model_path lmsys/vicuna-7b-v1.5 \
     --attack AutoDAN \
     --instructions_path ./data/harmful_bench_50.csv \
     --save_result_path ./exp_results/main_vicuna/ \
@@ -178,9 +178,9 @@ python main.py -h
 - [PAIR][R-PAIR]
   ```bash
   python -u main.py \
-    --target_model_path lmsys/vicuna-13b-v1.5 \
+    --target_model_path lmsys/vicuna-7b-v1.5 \
     --attack PAIR \
-    --attack_model lmsys/vicuna-13b-v1.5 \
+    --attack_model lmsys/vicuna-7b-v1.5 \
     --instructions_path ./data/harmful_bench_50.csv \
     --save_result_path ./exp_results/main_vicuna/ \
     --resume_exp \
@@ -189,9 +189,9 @@ python main.py -h
 - [TAP][R-TAP]
   ```bash
     python -u main.py \
-      --target_model_path lmsys/vicuna-13b-v1.5 \
+      --target_model_path lmsys/vicuna-7b-v1.5 \
       --attack TAP \
-      --attack_model lmsys/vicuna-13b-v1.5 \
+      --attack_model lmsys/vicuna-7b-v1.5 \
       --instructions_path ./data/harmful_bench_50.csv \
       --save_result_path ./exp_results/main_vicuna/ \
       --resume_exp \
@@ -201,7 +201,7 @@ python main.py -h
 - [GPTFuzz][R-GPTFuzz]
   ```bash
   python -u main.py \
-    --target_model_path lmsys/vicuna-13b-v1.5 \
+    --target_model_path lmsys/vicuna-7b-v1.5 \
     --attack GPTFuzz \
     --instructions_path ./data/harmful_bench_50.csv \
     --save_result_path ./exp_results/main_vicuna/ \
@@ -211,7 +211,7 @@ python main.py -h
 - [GCG][R-GCG]
   ```bash
   python -u main.py \
-    --target_model_path lmsys/vicuna-13b-v1.5 \
+    --target_model_path lmsys/vicuna-7b-v1.5 \
     --attack GCG \
     --instructions_path ./data/harmful_bench_50.csv \
     --save_result_path ./exp_results/main_vicuna/ \
@@ -222,7 +222,7 @@ python main.py -h
 - [AdvPrompter][R-AdvPrompter]
   ```bash
   python -u main.py \
-    --target_model_path lmsys/vicuna-13b-v1.5 \
+    --target_model_path lmsys/vicuna-7b-v1.5 \
     --attack AdvPrompter \
     --instructions_path ./data/harmful_bench_50.csv \
     --save_result_path ./exp_results/main_vicuna/ \
@@ -234,7 +234,7 @@ python main.py -h
 - [AmpleGCG][R-AmpleGCG]
   ```bash
   python -u main.py \
-    --target_model_path lmsys/vicuna-13b-v1.5 \
+    --target_model_path lmsys/vicuna-7b-v1.5 \
     --attack AmpleGCG \
     --instructions_path ./data/harmful_bench_50.csv \
     --save_result_path ./exp_results/main_vicuna/ \
@@ -245,7 +245,7 @@ python main.py -h
 - [DrAttack][R-DrAttack]
   ```bash
   python -u main.py \
-    --target_model_path lmsys/vicuna-13b-v1.5 \
+    --target_model_path lmsys/vicuna-7b-v1.5 \
     --attack DrAttack \
     --instructions_path ./data/harmful_bench_50.csv \
     --save_result_path ./exp_results/main_vicuna/ \
@@ -257,7 +257,7 @@ python main.py -h
 - [MultiJail][R-MultiJail]
   ```bash
   python -u main.py \
-    --target_model_path lmsys/vicuna-13b-v1.5 \
+    --target_model_path lmsys/vicuna-7b-v1.5 \
     --attack MultiJail \
     --instructions_path ./baseline/MultiJail/multijail_data/1_MultiJail_en.csv \
     --save_result_path ./exp_results/main_vicuna/ \

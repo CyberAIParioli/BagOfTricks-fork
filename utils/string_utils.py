@@ -1,10 +1,7 @@
 import csv
-import json
-import os
-from sklearn.model_selection import train_test_split
-import pandas as pd
-from FastChat.fastchat import model as fsmodel
-from FastChat.fastchat.model.model_adapter import get_model_adapter
+from fastchat import model as fsmodel
+from fastchat.model.model_adapter import get_model_adapter
+
 
 def load_prompts(instructions_path):
     with open(instructions_path, "r", newline="", encoding="utf-8") as f:
@@ -16,6 +13,7 @@ def load_prompts(instructions_path):
             targets.append(row["target"])
     return goals, targets
 
+
 def load_pert_goals(instructions_path):
     with open(instructions_path, "r", newline="", encoding="utf-8") as f:
         reader = csv.DictReader(f)
@@ -23,6 +21,7 @@ def load_pert_goals(instructions_path):
         for row in reader:
             pert_goal.append(row["pert_goal"])
     return pert_goal
+
 
 def load_goals(instructions_path):
     with open(instructions_path, "r", newline="", encoding="utf-8") as f:
@@ -32,10 +31,11 @@ def load_goals(instructions_path):
             pert_goal.append(row["goal"])
     return pert_goal
 
+
 def get_template_name(model_path):
     if "gpt-4" in model_path:
         template_name = "gpt-4"
-    elif  "gpt-3.5-turbo" in model_path:
+    elif "gpt-3.5-turbo" in model_path:
         template_name = "gpt-3.5-turbo"
     elif "vicuna-13b-v1.5" in model_path:
         template_name = "vicuna_v1.5"
@@ -47,8 +47,7 @@ def get_template_name(model_path):
         template_name = "llama-3"
     else:
         raise NameError
-    return  template_name
-
+    return template_name
 
 
 def load_default_conversation_template():

@@ -99,6 +99,14 @@ def initialize_args():
     )
     parser.add_argument("--device_id", type=int, default="0", help="device id")
     ##################################################
+    ################## Defense Type ################################
+    parser.add_argument(
+        "--defense_type",
+        type=str,
+        default="None_defense",
+        help="Defense type to apply",
+    )
+    ##################################################
     ################## Attack Methods################################
     parser.add_argument(
         "--attack",

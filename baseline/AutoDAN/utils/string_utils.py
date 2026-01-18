@@ -1,5 +1,5 @@
 import torch
-from FastChat.fastchat import model
+from fastchat import model
 
 
 def load_conversation_template(template_name):

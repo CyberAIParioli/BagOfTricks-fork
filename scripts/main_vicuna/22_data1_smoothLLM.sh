@@ -2,7 +2,7 @@
 set -e
 
 python -u main.py \
-    --target_model_path lmsys/vicuna-13b-v1.5 \
+    --target_model_path lmsys/vicuna-7b-v1.5 \
     --defense_type smoothLLM \
     --attack AutoDAN \
     --instructions_path ./data/harmful_bench_50.csv \
@@ -11,6 +11,6 @@ python -u main.py \
     --resume_exp \
     --agent_recheck \
     --exp_name main_vicuna_smoothllm \
-    2>&1 | tee -ai ./exp_logs/main_vicuna/harmful_bench_50/smoothLLM/AutoDAN/main_vicuna_smoothllm/4_split0_harmful_bench_50_smoothLLM_AutoDAN_vicuna-13b-v1.5_$(date +\%Y\%m\%d_\%H\%M\%S).txt
+    2>&1 | tee -ai ./exp_logs/main_vicuna/harmful_bench_50/smoothLLM/AutoDAN/main_vicuna_smoothllm/4_split0_harmful_bench_50_smoothLLM_AutoDAN_vicuna-7b-v1.5_$(date +\%Y\%m\%d_\%H\%M\%S).txt
 
 

@@ -1,8 +1,8 @@
-#!/usr/bin/bash
+#!/usr%bin/bash
 set -e
 
 python -u main.py \
-    --target_model_path ./models/defense/2_vicuna-13b-v1.5_unlearn \
+    --target_model_path ./models/defense/2_vicuna-7b-v1.5_unlearn \
     --defense_type unlearn \
     --attack GPTFuzz \
     --instructions_path ./data/harmful_bench_50.csv \
@@ -11,6 +11,6 @@ python -u main.py \
     --resume_exp \
     --agent_recheck \
     --exp_name main_vicuna_unlearn \
-    2>&1 | tee -ai ./exp_logs/main_vicuna/harmful_bench_50/unlearn/GPTFuzz/main_vicuna_unlearn/6_split0_harmful_bench_50_unlearn_GPTFuzz_2_vicuna-13b-v1.5_unlearn_$(date +\%Y\%m\%d_\%H\%M\%S).txt
+    2>&1 | tee -ai ./exp_logs/main_vicuna/harmful_bench_50/unlearn/GPTFuzz/main_vicuna_unlearn/6_split0_harmful_bench_50_unlearn_GPTFuzz_2_vicuna-7b-v1.5_unlearn_$(date +\%Y\%m\%d_\%H\%M\%S).txt
 
 

@@ -2,7 +2,7 @@ python -u main.py \
     --target_model_path meta-llama/Llama-2-7b-chat-hf \
     --defense_type None_defense \
     --attack PAIR \
-    --attack_model lmsys/vicuna-13b-v1.5 \
+    --attack_model lmsys/vicuna-7b-v1.5 \
     --instructions_path ./data/category_1.csv \
     --save_result_path ./exp_results/trick_atk_intension_pair/ \
     --agent_evaluation \
@@ -15,7 +15,7 @@ python -u main.py \
     --target_model_path meta-llama/Llama-2-7b-chat-hf \
     --defense_type None_defense \
     --attack PAIR \
-    --attack_model lmsys/vicuna-13b-v1.5 \
+    --attack_model lmsys/vicuna-7b-v1.5 \
     --instructions_path ./data/category_2.csv \
     --save_result_path ./exp_results/trick_atk_intension_pair/ \
     --agent_evaluation \
@@ -28,7 +28,7 @@ python -u main.py \
     --target_model_path meta-llama/Llama-2-7b-chat-hf \
     --defense_type None_defense \
     --attack PAIR \
-    --attack_model lmsys/vicuna-13b-v1.5 \
+    --attack_model lmsys/vicuna-7b-v1.5 \
     --instructions_path ./data/category_3.csv \
     --save_result_path ./exp_results/trick_atk_intension_pair/ \
     --agent_evaluation \
@@ -41,7 +41,7 @@ python -u main.py \
     --target_model_path meta-llama/Llama-2-7b-chat-hf \
     --defense_type None_defense \
     --attack PAIR \
-    --attack_model lmsys/vicuna-13b-v1.5 \
+    --attack_model lmsys/vicuna-7b-v1.5 \
     --instructions_path ./data/category_4.csv \
     --save_result_path ./exp_results/trick_atk_intension_pair/ \
     --agent_evaluation \
@@ -54,7 +54,7 @@ python -u main.py \
     --target_model_path meta-llama/Llama-2-7b-chat-hf \
     --defense_type None_defense \
     --attack PAIR \
-    --attack_model lmsys/vicuna-13b-v1.5 \
+    --attack_model lmsys/vicuna-7b-v1.5 \
     --instructions_path ./data/category_5.csv \
     --save_result_path ./exp_results/trick_atk_intension_pair/ \
     --agent_evaluation \
@@ -67,7 +67,7 @@ python -u main.py \
     --target_model_path meta-llama/Llama-2-7b-chat-hf \
     --defense_type None_defense \
     --attack PAIR \
-    --attack_model lmsys/vicuna-13b-v1.5 \
+    --attack_model lmsys/vicuna-7b-v1.5 \
     --instructions_path ./data/category_6.csv \
     --save_result_path ./exp_results/trick_atk_intension_pair/ \
     --agent_evaluation \
@@ -80,7 +80,7 @@ python -u main.py \
     --target_model_path meta-llama/Llama-2-7b-chat-hf \
     --defense_type None_defense \
     --attack PAIR \
-    --attack_model lmsys/vicuna-13b-v1.5 \
+    --attack_model lmsys/vicuna-7b-v1.5 \
     --instructions_path ./data/category_7.csv \
     --save_result_path ./exp_results/trick_atk_intension_pair/ \
     --agent_evaluation \
@@ -93,7 +93,7 @@ python -u main.py \
     --target_model_path meta-llama/Llama-2-7b-chat-hf \
     --defense_type None_defense \
     --attack PAIR \
-    --attack_model lmsys/vicuna-13b-v1.5 \
+    --attack_model lmsys/vicuna-7b-v1.5 \
     --instructions_path ./data/category_8.csv \
     --save_result_path ./exp_results/trick_atk_intension_pair/ \
     --agent_evaluation \
@@ -106,7 +106,7 @@ python -u main.py \
     --target_model_path meta-llama/Llama-2-7b-chat-hf \
     --defense_type None_defense \
     --attack PAIR \
-    --attack_model lmsys/vicuna-13b-v1.5 \
+    --attack_model lmsys/vicuna-7b-v1.5 \
     --instructions_path ./data/category_9.csv \
     --save_result_path ./exp_results/trick_atk_intension_pair/ \
     --agent_evaluation \
@@ -119,7 +119,7 @@ python -u main.py \
     --target_model_path meta-llama/Llama-2-7b-chat-hf \
     --defense_type None_defense \
     --attack PAIR \
-    --attack_model lmsys/vicuna-13b-v1.5 \
+    --attack_model lmsys/vicuna-7b-v1.5 \
     --instructions_path ./data/category_10.csv \
     --save_result_path ./exp_results/trick_atk_intension_pair/ \
     --agent_evaluation \
@@ -132,7 +132,7 @@ python -u main.py \
     --target_model_path meta-llama/Llama-2-7b-chat-hf \
     --defense_type None_defense \
     --attack PAIR \
-    --attack_model lmsys/vicuna-13b-v1.5 \
+    --attack_model lmsys/vicuna-7b-v1.5 \
     --instructions_path ./data/category_11.csv \
     --save_result_path ./exp_results/trick_atk_intension_pair/ \
     --agent_evaluation \

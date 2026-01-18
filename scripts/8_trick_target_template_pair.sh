@@ -2,7 +2,7 @@ python -u main.py \
     --target_model_path meta-llama/Llama-2-7b-chat-hf \
     --defense_type None_defense \
     --attack PAIR \
-    --attack_model lmsys/vicuna-13b-v1.5 \
+    --attack_model lmsys/vicuna-7b-v1.5 \
     --instructions_path ./data/harmful_bench_50.csv \
     --save_result_path ./exp_results/trick_target_template_pair/ \
     --agent_evaluation \
@@ -17,7 +17,7 @@ python -u main.py \
     --target_model_path meta-llama/Meta-Llama-3-8B-Instruct \
     --defense_type None_defense \
     --attack PAIR \
-    --attack_model lmsys/vicuna-13b-v1.5 \
+    --attack_model lmsys/vicuna-7b-v1.5 \
     --instructions_path ./data/harmful_bench_50.csv \
     --save_result_path ./exp_results/trick_target_template_pair/ \
     --agent_evaluation \
@@ -32,7 +32,7 @@ python -u main.py \
     --target_model_path lmsys/vicuna-7b-v1.5 \
     --defense_type None_defense \
     --attack PAIR \
-    --attack_model lmsys/vicuna-13b-v1.5 \
+    --attack_model lmsys/vicuna-7b-v1.5 \
     --instructions_path ./data/harmful_bench_50.csv \
     --save_result_path ./exp_results/trick_target_template_pair/ \
     --agent_evaluation \
@@ -47,7 +47,7 @@ python -u main.py \
     --target_model_path meta-llama/Llama-2-7b-chat-hf \
     --defense_type None_defense \
     --attack PAIR \
-    --attack_model lmsys/vicuna-13b-v1.5 \
+    --attack_model lmsys/vicuna-7b-v1.5 \
     --instructions_path ./data/harmful_bench_50.csv \
     --save_result_path ./exp_results/trick_target_template_pair/ \
     --agent_evaluation \
@@ -61,7 +61,7 @@ python -u main.py \
     --target_model_path meta-llama/Meta-Llama-3-8B-Instruct \
     --defense_type None_defense \
     --attack PAIR \
-    --attack_model lmsys/vicuna-13b-v1.5 \
+    --attack_model lmsys/vicuna-7b-v1.5 \
     --instructions_path ./data/harmful_bench_50.csv \
     --save_result_path ./exp_results/trick_target_template_pair/ \
     --agent_evaluation \
@@ -75,7 +75,7 @@ python -u main.py \
     --target_model_path lmsys/vicuna-7b-v1.5 \
     --defense_type None_defense \
     --attack PAIR \
-    --attack_model lmsys/vicuna-13b-v1.5 \
+    --attack_model lmsys/vicuna-7b-v1.5 \
     --instructions_path ./data/harmful_bench_50.csv \
     --save_result_path ./exp_results/trick_target_template_pair/ \
     --agent_evaluation \

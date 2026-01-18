@@ -2,7 +2,7 @@
 set -e
 
 python -u main.py \
-    --target_model_path ./models/defense/1_vicuna-13b-v1.5_adv_traning \
+    --target_model_path ./models/defense/1_vicuna-7b-v1.5_adv_traning \
     --defense_type adv_training_noaug \
     --attack AdvPrompter \
     --instructions_path ./data/harmful_bench_50.csv \
@@ -12,6 +12,6 @@ python -u main.py \
     --agent_recheck \
     --exp_name main_vicuna_adv_training_noaug \
     --adv_prompter_model_path ./models/attack/advprompter_vicuna_7b \
-    2>&1 | tee -ai ./exp_logs/main_vicuna/harmful_bench_50/adv_training_noaug/AdvPrompter/main_vicuna_adv_training_noaug/5_advprompter_vicuna_split0_harmful_bench_50_adv_training_noaug_AdvPrompter_1_vicuna-13b-v1.5_adv_traning_$(date +\%Y\%m\%d_\%H\%M\%S).txt
+    2>&1 | tee -ai ./exp_logs/main_vicuna/harmful_bench_50/adv_training_noaug/AdvPrompter/main_vicuna_adv_training_noaug/5_advprompter_vicuna_split0_harmful_bench_50_adv_training_noaug_AdvPrompter_1_vicuna-7b-v1.5_adv_traning_$(date +\%Y\%m\%d_\%H\%M\%S).txt
 
 
